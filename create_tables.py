@@ -2,7 +2,6 @@ from app.config import Config
 from app.server import create_app
 from app.setup.db import db
 
-from app.dao.model.genre import Genre
 
 if __name__ == "__main__":
     with create_app(Config).app_context():

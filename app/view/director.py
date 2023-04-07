@@ -9,7 +9,7 @@ directors_ns = Namespace('directors')
 
 
 @directors_ns.route('/')
-class GenresView(Resource):
+class DirectorsView(Resource):
     @directors_ns.doc(desciption="Get director")
     @directors_ns.response(200, "Success", model=director)
     @directors_ns.response(404, "Not found")
@@ -25,7 +25,7 @@ class GenresView(Resource):
 
 
 @directors_ns.route('/<int:gid>')
-class GenreView(Resource):
+class DirectorView(Resource):
     @directors_ns.doc(desciption="Get directors")
     @directors_ns.response(200, "Success", model=director)
     @directors_ns.response(404, "Not found")
