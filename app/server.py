@@ -3,6 +3,7 @@ from typing import Type
 from app.config import Config
 
 from app.view.genre import genre_ns
+from app.view.director import directors_ns
 
 from app.setup.api import api
 from app.setup.db import db
@@ -24,5 +25,6 @@ def create_app(config_obj: Type[Config]):
 
     # namespaces
     api.add_namespace(genre_ns)
+    api.add_namespace(directors_ns)
 
     return app
