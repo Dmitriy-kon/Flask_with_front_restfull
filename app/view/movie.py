@@ -1,4 +1,5 @@
 from flask_restx import Resource, Namespace
+from flask import request
 
 from app.container import movie_services
 from app.dao.model.movie import MovieSchema
@@ -10,16 +11,25 @@ movies_ns = Namespace('movies')
 
 @movies_ns.route('/')
 class MoviesView(Resource):
-    @movies_ns.doc(desciption="Get movie")
+    @movies_ns.doc(desciption="Get movie",
+                   params={
+                       'status': "new, if you need desc new ",
+                       'page': "page number"
+                   })
     @movies_ns.response(200, "Success", model=movie)
     @movies_ns.response(404, "Not found")
     def get(self):
-        genres = movie_services.get_all()
+        filters = {
+            'status': request.args.get('status'),
+            'page': request.args.get('page', type=int)
+        }
 
-        if not genres:
+        movies = movie_services.get_all(filters)
+
+        if not movies:
             return "directors not found", 404
 
-        res = MovieSchema(many=True).dump(genres)
+        res = MovieSchema(many=True).dump(movies)
 
         return res, 200
 
