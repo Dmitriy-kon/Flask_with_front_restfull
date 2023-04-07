@@ -30,9 +30,9 @@ class MovieView(Resource):
     @movies_ns.response(200, "Success", model=movie)
     @movies_ns.response(404, "Not found")
     def get(self, gid):
-        genre = movie_services.get_one(gid)
+        movie = movie_services.get_one(gid)
 
-        if not genre:
-            return f"genre with id {gid}, not found", 404
+        if not movie:
+            return f"movie with id {gid}, not found", 404
 
-        return MovieSchema().dump(genre), 200
+        return MovieSchema().dump(movie), 200

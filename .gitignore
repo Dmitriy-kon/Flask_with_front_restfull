@@ -6,3 +6,4 @@ __pycache__
 .coverage
 load*
 fixtures.json
+new_movie.json

@@ -23,3 +23,11 @@ movie: Model = api.model("Фильм", {
     'genre': fields.String(required=True, example="Хоррор"),
     'director': fields.String(required=True, example="Тарантино")
 })
+
+user: Model = api.model("Пользователь", {
+    'id': fields.Integer(required=True, example=1),
+    'email': fields.String(required=True, example="somemail@gmail.com", unique=True),
+    'password': fields.String(required=True, example="Hash"),
+    'name': fields.String(required=False, example="Artem"),
+    'surname': fields.String(required=False, example="Denisov Artem"),
+})

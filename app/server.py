@@ -5,6 +5,7 @@ from app.config import Config
 from app.view.genre import genre_ns
 from app.view.director import directors_ns
 from app.view.movie import movies_ns
+from app.view.user import user_ns
 
 from app.setup.api import api
 from app.setup.db import db
@@ -28,5 +29,6 @@ def create_app(config_obj: Type[Config]):
     api.add_namespace(genre_ns)
     api.add_namespace(directors_ns)
     api.add_namespace(movies_ns)
+    api.add_namespace(user_ns)
 
     return app
