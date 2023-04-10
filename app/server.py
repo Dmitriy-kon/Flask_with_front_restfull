@@ -1,5 +1,7 @@
 from typing import Type
 
+from flask_migrate import Migrate
+
 from app.config import Config
 
 from app.view.genre import genre_ns
@@ -30,5 +32,7 @@ def create_app(config_obj: Type[Config]):
     api.add_namespace(directors_ns)
     api.add_namespace(movies_ns)
     api.add_namespace(user_ns)
+
+    migrate = Migrate(app, db, render_as_batch=True)
 
     return app

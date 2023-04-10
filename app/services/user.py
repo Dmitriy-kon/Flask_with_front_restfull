@@ -10,3 +10,18 @@ class UserService:
 
     def get_all(self):
         return self.user_dao.get_all()
+
+    def create(self, data: dict):
+        user = self.user_dao.create(data)
+        return user
+
+    def update(self, uid, data):
+        self.user_dao.update(uid, data)
+
+    def delete(self, uid):
+        self.user_dao.delete(uid)
+
+    # @staticmethod
+    # def __validate_data(data: dict, is_create=None):
+    #     if is_create:
+    #         return set(data.keys()) == {'email', 'password', 'name', 'surname', 'favorite_genre'}

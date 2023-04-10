@@ -30,4 +30,5 @@ user: Model = api.model("Пользователь", {
     'password': fields.String(required=True, example="Hash"),
     'name': fields.String(required=False, example="Artem"),
     'surname': fields.String(required=False, example="Denisov Artem"),
+    'favorite_genre': fields.Integer(required=False, example=3)
 })

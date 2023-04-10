@@ -13,7 +13,7 @@ class User(Base):
     name: Mapped[str] = mapped_column(String(150))
     surname: Mapped[str] = mapped_column(String(150))
 
-    # favorite_genre: Mapped[int] = mapped_column(Integer)
+    favorite_genre: Mapped[int] = mapped_column(Integer, nullable=True, default=2)
 
 
 class UserSchema(Schema):
@@ -23,4 +23,4 @@ class UserSchema(Schema):
     name = fields.Str()
     surname = fields.Str()
 
-    # favorite_genre = fields.Int()
+    favorite_genre = fields.Int()
