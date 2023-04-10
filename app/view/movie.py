@@ -45,4 +45,5 @@ class MovieView(Resource):
         if not movie:
             return f"movie with id {gid}, not found", 404
 
-        return MovieSchema().dump(movie), 200
+        res = MovieSchema().dump(movie)
+        return res, 200

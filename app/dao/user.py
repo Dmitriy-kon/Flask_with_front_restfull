@@ -1,3 +1,4 @@
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 
@@ -9,9 +10,10 @@ class UserDao:
         self.session = session
 
     def get_one(self, uid):
-        user = self.session.query(User).get(uid)
+        user = self.session.get(User, uid)
         return user
 
     def get_all(self):
-        users = self.session.query(User).all()
+        stmt = select(User)
+        users = self.session.scalars(stmt).all()
         return users

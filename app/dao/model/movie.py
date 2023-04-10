@@ -29,5 +29,5 @@ class MovieSchema(Schema):
     year = fields.Int()
     rating = fields.Float()
 
-    genre = fields.Str()
-    director = fields.Str()
+    genre = fields.Function(lambda x: x.genre.name, attribute='genre')
+    director = fields.Function(lambda x: x.director.name, attribute='director')

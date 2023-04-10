@@ -1,3 +1,4 @@
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 
@@ -9,9 +10,11 @@ class GenreDao:
         self.session = session
 
     def get_one(self, uid):
-        genre = self.session.query(Genre).get(uid)
+        genre = self.session.get(Genre, uid)
         return genre
 
     def get_all(self):
-        genres = self.session.query(Genre).all()
+        stmt = select(Genre)
+
+        genres = self.session.scalars(stmt).all()
         return genres

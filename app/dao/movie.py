@@ -1,10 +1,9 @@
 from typing import Type
 
-from sqlalchemy import desc
+from sqlalchemy import desc, select, Select
 
 from sqlalchemy.orm import Session
-from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound, _T
-from sqlalchemy.orm.query import RowReturningQuery
+from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 
 from app.dao.model.movie import Movie
 from app.dao.model.director import Director
@@ -15,44 +14,39 @@ class MovieDao:
     def __init__(self, session: Session):
         self.session = session
 
-    def __get_names(self):
-        movie_query = self.session.query(
-            Movie.id,
-            Movie.title,
-            Movie.description,
-            Movie.trailer,
-            Movie.year,
-            Movie.rating,
-            Genre.name.label("genre"),
-            Director.name.label("director")
-        ).join(Movie.genre).join(Movie.director)
-        # movie_query = self.session.query(Movie).join(Movie.genre).join(Movie.director)
+    @staticmethod
+    def __get_join_stmt() -> Select:
+        stmt = select(Movie).join(Movie.genre).join(Movie.director)
+        return stmt
 
-        return movie_query
+    @staticmethod
+    def __filter_movies(stmt: Select, filters: dict[str, int | str] | None) -> Select:
+        movies = stmt
 
-    def get_one(self, mid):
-        movie = self.__get_names().filter(Movie.id == mid).one()
-        return movie
+        page = filters.get('page', 1)
+        status = filters.get('status', None)
 
-    def get_all(self):
-        movies = self.__get_names().all()
+        if status == "new":
+            movies = movies.order_by(desc(Movie.created))
+
+        _limit = 12
+        _offset = (page - 1) * _limit
+
+        movies = movies.offset(_offset).limit(_limit)
 
         return movies
 
-    def filter_movies(self, filters: dict[str, int | str]) -> RowReturningQuery | list[_T]:
-        movies = self.__get_names()
+    def get_one(self, mid: int) -> Movie:
+        stmt = self.__get_join_stmt().where(Movie.id == mid)
+        movie = self.session.execute(stmt).scalar_one()
+        return movie
 
-        page = filters.get('page')
+    def get_all(self, filters: dict | None = None) -> list[Movie]:
+        stmt = self.__get_join_stmt()
 
-        status = filters.get('status')
+        if filters:
+            stmt = self.__filter_movies(stmt, filters)
 
-        if status and status == "new":
-            movies = movies.order_by(desc(Movie.created))
+        movies = self.session.scalars(stmt).all()
 
-        if filters.get("page"):
-            _limit = 12
-            _offset = (page - 1) * _limit
-
-            movies = movies.offset(_offset).limit(_limit)
-
-        return movies.all()
+        return movies

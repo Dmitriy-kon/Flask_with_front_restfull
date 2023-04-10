@@ -9,8 +9,8 @@ class Genre(Base):
     __tablename__ = "genres"
     name: Mapped[str] = mapped_column(String(100), nullable=False)
 
-    def __repr__(self):
-        return f"{self.name}"
+    # def __repr__(self):
+    #     return f"{self.name}"
 
 
 class GenreSchema(Schema):

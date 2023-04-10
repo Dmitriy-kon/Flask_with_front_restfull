@@ -1,3 +1,4 @@
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 
@@ -9,9 +10,12 @@ class DirectorDao:
         self.session = session
 
     def get_one(self, uid):
-        director = self.session.query(Director).get(uid)
+        director = self.session.get(Director, uid)
+        # director = self.session.query(Director).get(uid)
         return director
 
     def get_all(self):
-        directors = self.session.query(Director).all()
+        stmt = select(Director)
+        directors = self.session.scalars(stmt).all()
+
         return directors
