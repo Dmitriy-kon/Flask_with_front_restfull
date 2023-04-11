@@ -5,5 +5,12 @@ class ItemNotFound(Exception):
 class UserAlreadyExist(Exception):
     pass
 
+
 class IncorrectPassword(Exception):
     pass
+
+
+class InvalidToken(Exception):
+    pass
+
+

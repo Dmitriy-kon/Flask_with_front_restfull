@@ -23,15 +23,11 @@ class UserDao:
         except NoResultFound:
             return None
 
-    def get_one(self, uid):
-        stmt = select(User).where(User.id == uid)
-        user = self.session.scalar(stmt)
-        return user
-
-    def get_all(self):
-        stmt = select(User)
-        users = self.session.scalars(stmt).all()
-        return users
+    def update_by_email(self, data: dict, email: str) -> None:
+        """Update user with data"""
+        stmt = update(User).where(User.email == email).values(**data).returning(User)
+        self.session.execute(stmt)
+        self.session.commit()
 
     def create(self, data):
         stmt = insert(User).values(**data).returning(User)
@@ -39,22 +35,7 @@ class UserDao:
         result = self.session.execute(stmt)
         user = result.scalar_one()
 
-        # user = User(**data)
-        # self.session.add(user)
-
         self.session.commit()
-        return user
-
-    def update(self, uid, data):
-        stmt = update(User) \
-            .where(User.id == uid) \
-            .values(**data).returning(User)
-
-        result = self.session.execute(stmt)
-        user = result.scalar_one()
-
-        self.session.commit()
-
         return user
 
     def delete(self, uid):

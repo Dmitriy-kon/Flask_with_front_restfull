@@ -4,7 +4,7 @@ from marshmallow import ValidationError
 
 from app.container import user_service, auth_service
 from app.dao.model.user import UserSchema
-from app.exceptions import UserAlreadyExist, ItemNotFound, IncorrectPassword
+from app.exceptions import UserAlreadyExist, ItemNotFound, IncorrectPassword, InvalidToken
 from app.setup.api.models import auth, tokens_model
 
 auth_ns = Namespace('auth', description='Authorization and authentication')
@@ -58,3 +58,19 @@ class AuthLoginView(Resource):
             abort(401, 'User not found')
         except IncorrectPassword:
             abort(401, 'Incorrect password')
+
+    @auth_ns.doc(description='Get new tokens', body=tokens_model)
+    @auth_ns.response(201, 'Tokens created', tokens_model)
+    @auth_ns.response(401, 'Invalid refresh token')
+    def put(self):
+        try:
+            # Check data valid
+            refresh_token = request.json.get('refresh_token')
+            if not refresh_token:
+                abort(400, 'Not valid data passed')
+
+            # Get tokens
+            tokens = auth_service.approve_token(refresh_token)
+            return tokens, 201
+        except InvalidToken:
+            abort(401, 'Invalid token passed')

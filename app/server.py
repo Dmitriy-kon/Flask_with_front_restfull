@@ -1,6 +1,7 @@
 from typing import Type
 
 from flask_migrate import Migrate
+from flask_restx import Api
 
 from app.config import Config
 

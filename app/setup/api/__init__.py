@@ -5,5 +5,6 @@ api = Api(
         "Bearer": {"type": "apiKey", "in": "header", "name": "Authorization"}
     },
     title="Flask project",
-    doc="/docs"
+    doc="/docs",
+    security="Bearer"
 )

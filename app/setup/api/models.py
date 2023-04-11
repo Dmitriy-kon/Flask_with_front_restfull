@@ -42,3 +42,8 @@ tokens_model = api.model('Tokens', {
     'access_token': fields.String(required=True),
     'refresh_token': fields.String(required=True)
 })
+
+passwords = api.model('Смена пароля', {
+    'old_password': fields.String(example="my_password"),
+    'new_password': fields.String(example='my_new_password')
+})
