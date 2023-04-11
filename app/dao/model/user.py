@@ -10,8 +10,8 @@ class User(Base):
     __tablename__ = "users"
     email: Mapped[str] = mapped_column(String(100), nullable=False, unique=True)
     password: Mapped[str] = mapped_column(String(150), nullable=False)
-    name: Mapped[str] = mapped_column(String(150))
-    surname: Mapped[str] = mapped_column(String(150))
+    name: Mapped[str] = mapped_column(String(150), nullable=True)
+    surname: Mapped[str] = mapped_column(String(150), nullable=True)
 
     favorite_genre: Mapped[int] = mapped_column(Integer, nullable=True, default=2)
 

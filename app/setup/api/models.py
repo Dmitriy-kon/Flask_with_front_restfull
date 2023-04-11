@@ -32,3 +32,13 @@ user: Model = api.model("Пользователь", {
     'surname': fields.String(required=False, example="Denisov Artem"),
     'favorite_genre': fields.Integer(required=False, example=3)
 })
+
+auth: Model = api.model("Регистрация", {
+    'email': fields.String(required=True, example="somemail@gmail.com"),
+    'password': fields.String(required=True, example="sjY65TBG2=71")
+})
+
+tokens_model = api.model('Tokens', {
+    'access_token': fields.String(required=True),
+    'refresh_token': fields.String(required=True)
+})

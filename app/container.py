@@ -7,6 +7,7 @@ from app.services.genre import GenreService
 from app.services.director import DirectorService
 from app.services.movie import MovieService
 from app.services.user import UserService
+from app.services.auth import AuthService
 
 from app.setup.db import db
 
@@ -21,3 +22,4 @@ genre_services = GenreService(genre_dao=genre_dao)
 director_services = DirectorService(director_dao=director_dao)
 movie_services = MovieService(movie_dao=movie_dao)
 user_service = UserService(user_dao=user_dao)
+auth_service = AuthService(user_service=user_service)

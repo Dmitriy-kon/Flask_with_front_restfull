@@ -58,16 +58,16 @@ class UserView(Resource):
     @user_ns.response(404, "Not found")
     def patch(self, uid):
         try:
-            user = user_service.get_one(uid)
+            user1 = user_service.get_one(uid)
             data = UserSchema().load(request.json)
 
-            if not user:
+            if not user1:
                 return f"User with id {uid}, no found", 404
 
         except ValidationError as er_:
             return f"{er_}", 400
 
-        user_service.update(uid, data)
+        user = user_service.update(uid, data)
 
         return f"Data added with id {user.id}", 201, {"location": f"users/{user.id}"}
 
