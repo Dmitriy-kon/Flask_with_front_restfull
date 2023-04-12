@@ -1,7 +1,6 @@
 from typing import Type
 
 from flask_migrate import Migrate
-from flask_restx import Api
 
 from app.config import Config
 
@@ -26,7 +25,9 @@ def create_app(config_obj: Type[Config]):
         return "This is index :)"
 
     # init app
+
     db.init_app(app)
+    migrate = Migrate(app, db, render_as_batch=True)
     api.init_app(app)
 
     # namespaces
@@ -36,6 +37,5 @@ def create_app(config_obj: Type[Config]):
     api.add_namespace(user_ns)
     api.add_namespace(auth_ns)
 
-    migrate = Migrate(app, db, render_as_batch=True)
 
     return app

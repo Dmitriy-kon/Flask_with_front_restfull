@@ -20,8 +20,10 @@ movie: Model = api.model("Фильм", {
     'year': fields.Integer(required=True, example=1920),
     'rating': fields.Float(required=True, example=8.2),
 
-    'genre': fields.String(required=True, example="Хоррор"),
-    'director': fields.String(required=True, example="Тарантино")
+    # 'genre': fields.String(required=True, example="Хоррор"),
+    # 'director': fields.String(required=True, example="Тарантино")
+    'genre': fields.Nested(genre),
+    'director': fields.Nested(director)
 })
 
 user: Model = api.model("Пользователь", {
@@ -30,7 +32,7 @@ user: Model = api.model("Пользователь", {
     'password': fields.String(required=True, example="Hash"),
     'name': fields.String(required=False, example="Artem"),
     'surname': fields.String(required=False, example="Denisov Artem"),
-    'favorite_genre': fields.Integer(required=False, example=3)
+    'favorite_genre_id': fields.Integer(required=False, example=2)
 })
 
 auth: Model = api.model("Регистрация", {

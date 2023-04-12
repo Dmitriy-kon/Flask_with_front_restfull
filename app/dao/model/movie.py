@@ -3,6 +3,8 @@ from marshmallow import fields, Schema
 from sqlalchemy import String, Integer, Float, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
+from app.dao.model.genre import GenreSchema
+from app.dao.model.director import DirectorSchema
 from app.setup.db.models import Base
 
 
@@ -29,5 +31,7 @@ class MovieSchema(Schema):
     year = fields.Int()
     rating = fields.Float()
 
-    genre = fields.Function(lambda x: x.genre.name, attribute='genre')
-    director = fields.Function(lambda x: x.director.name, attribute='director')
+    genre = fields.Nested(GenreSchema())
+    director = fields.Nested(DirectorSchema())
+    # genre = fields.Function(lambda x: x.genre.name, attribute='genre')
+    # director = fields.Function(lambda x: x.director.name, attribute='director')

@@ -29,6 +29,9 @@ class MovieDao:
         if status == "new":
             movies = movies.order_by(desc(Movie.created))
 
+        if not page:
+            page = 1
+
         _limit = 12
         _offset = (page - 1) * _limit
 
