@@ -1,8 +1,11 @@
+from typing import List
+
 from marshmallow import fields, Schema
 
 from sqlalchemy import String, Integer, Float, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
+# from app.dao.model.favorites import Favorite
 from app.dao.model.genre import GenreSchema
 from app.dao.model.director import DirectorSchema
 from app.setup.db.models import Base
@@ -21,6 +24,8 @@ class Movie(Base):
 
     genre = relationship("Genre")
     director = relationship("Director")
+
+    favorite_movies: Mapped[List["Favorite"]] = relationship("Favorite", back_populates="movie")
 
 
 class MovieSchema(Schema):

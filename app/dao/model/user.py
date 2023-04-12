@@ -1,9 +1,12 @@
+from typing import List
+
 from marshmallow import fields, Schema
 
 from sqlalchemy import String, Integer, Float, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.dao.model.genre import GenreSchema
+# from app.dao.model.favorites import Favorite
+from app.dao.model.genre import GenreSchema, Genre
 from app.setup.db.models import Base
 
 
@@ -16,7 +19,8 @@ class User(Base):
     favorite_genre_id: Mapped[int] = mapped_column(Integer, ForeignKey("genres.id", name='fk_user_genre'),
                                                    nullable=True)
 
-    favorite_genre = relationship("Genre")
+    favorite_genre: Mapped["Genre"] = relationship("Genre")
+    favorite_movies: Mapped[List["Favorite"]] = relationship("Favorite", back_populates="user")
 
 
 class UserSchema(Schema):

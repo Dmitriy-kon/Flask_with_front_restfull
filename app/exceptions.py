@@ -14,3 +14,5 @@ class InvalidToken(Exception):
     pass
 
 
+class ItemAlreadyExists(Exception):
+    pass
