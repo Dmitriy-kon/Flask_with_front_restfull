@@ -1,7 +1,7 @@
 from flask_restx import Resource, Namespace
 
 from app.container import director_services
-from app.dao.model.director import DirectorSchema
+from app.dao.model import DirectorSchema
 
 from app.setup.api.models import director
 

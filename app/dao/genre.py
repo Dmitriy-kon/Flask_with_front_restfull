@@ -2,7 +2,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 
-from app.dao.model.genre import Genre
+from app.dao.model import Genre
 
 
 class GenreDao:

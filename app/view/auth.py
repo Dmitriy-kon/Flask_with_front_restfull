@@ -3,7 +3,8 @@ from flask_restx import Namespace, Resource, abort
 from marshmallow import ValidationError
 
 from app.container import user_service, auth_service
-from app.dao.model.user import UserSchema
+from app.dao.model import UserSchema
+
 from app.exceptions import UserAlreadyExist, ItemNotFound, IncorrectPassword, InvalidToken
 from app.setup.api.models import auth, tokens_model
 

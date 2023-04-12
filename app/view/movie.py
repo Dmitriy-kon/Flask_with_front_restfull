@@ -2,7 +2,7 @@ from flask_restx import Resource, Namespace
 from flask import request
 
 from app.container import movie_services
-from app.dao.model.movie import MovieSchema
+from app.dao.model import MovieSchema
 
 from app.setup.api.models import movie
 

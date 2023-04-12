@@ -2,7 +2,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 
-from app.dao.model.director import Director
+from app.dao.model import Director
 
 
 class DirectorDao:

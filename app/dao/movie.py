@@ -5,9 +5,7 @@ from sqlalchemy import desc, select, Select
 from sqlalchemy.orm import Session
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 
-from app.dao.model.movie import Movie
-from app.dao.model.director import Director
-from app.dao.model.genre import Genre
+from app.dao.model import Movie
 
 
 class MovieDao:

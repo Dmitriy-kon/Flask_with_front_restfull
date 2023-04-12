@@ -1,9 +1,8 @@
 from sqlalchemy import select, insert, update, delete
 from sqlalchemy.orm import Session
 
-
-from app.dao.model.movie import Movie
-from app.dao.model.favorites import Favorite
+from app.dao.model import Movie
+from app.dao.model import Favorite
 
 
 class FavoritesDao:

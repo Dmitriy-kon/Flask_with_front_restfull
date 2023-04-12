@@ -1,5 +1,5 @@
-from app.dao.model.favorites import Favorite
-from app.dao.favorites import FavoritesDao
+from app.dao import FavoritesDao
+
 from app.exceptions import ItemAlreadyExists
 
 
@@ -21,6 +21,3 @@ class FavoriteService:
             raise ItemAlreadyExists
 
         self.dao.create(data)
-
-
-

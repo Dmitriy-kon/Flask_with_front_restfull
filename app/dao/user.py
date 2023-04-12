@@ -2,7 +2,7 @@ from sqlalchemy import select, insert, update, delete
 from sqlalchemy.orm import Session
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 
-from app.dao.model.user import User
+from app.dao.model import User
 
 
 class UserDao:

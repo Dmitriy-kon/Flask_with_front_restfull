@@ -1,7 +1,7 @@
 from flask_restx import Resource, Namespace
 
 from app.container import genre_services
-from app.dao.model.genre import GenreSchema
+from app.dao.model import GenreSchema
 
 from app.setup.api.models import genre
 

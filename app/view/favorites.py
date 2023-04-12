@@ -3,9 +3,10 @@ from flask_restx import Namespace, abort, Resource
 
 from app.exceptions import ItemNotFound, InvalidToken, ItemAlreadyExists
 
-from app.dao.model.favorites import FavouriteSchema
-from app.dao.model.movie import MovieSchema
+from app.dao.model import MovieSchema
 from app.container import user_service, auth_service, movie_services, favorites_service
+
+from app.setup.api.models import movies, movie
 
 favorite_ns = Namespace('favorites', description='Views for favourites')
 
@@ -13,7 +14,7 @@ favorite_ns = Namespace('favorites', description='Views for favourites')
 @favorite_ns.route('/movies/')
 class FavouritesViews(Resource):
     @favorite_ns.doc(description='Get user favourites')
-    @favorite_ns.response(200, 'Success')
+    @favorite_ns.response(200, 'Success', model=movies)
     @favorite_ns.response(404, 'Not found')
     def get(self):
         # Get token
@@ -29,8 +30,8 @@ class FavouritesViews(Resource):
 
     @favorite_ns.route('/movies/<int:movie_id>/')
     class FavouriteView(Resource):
-        @favorite_ns.doc(description='Add favourites', params={'Movie id': 'Movie id'})
-        @favorite_ns.response(200, 'Success')
+        @favorite_ns.doc(description='Add favourites')
+        @favorite_ns.response(200, 'Success', model=movie)
         @favorite_ns.response(404, 'Not found')
         def post(self, movie_id):
             try:

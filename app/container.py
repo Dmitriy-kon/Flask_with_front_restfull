@@ -1,15 +1,15 @@
-from app.dao.genre import GenreDao
-from app.dao.director import DirectorDao
-from app.dao.movie import MovieDao
-from app.dao.user import UserDao
-from app.dao.favorites import FavoritesDao
+from app.dao import GenreDao
+from app.dao import DirectorDao
+from app.dao import MovieDao
+from app.dao import UserDao
+from app.dao import FavoritesDao
 
-from app.services.genre import GenreService
-from app.services.director import DirectorService
-from app.services.movie import MovieService
-from app.services.user import UserService
-from app.services.auth import AuthService
-from app.services.favorites import FavoriteService
+from app.services import GenreService
+from app.services import DirectorService
+from app.services import MovieService
+from app.services import UserService
+from app.services import AuthService
+from app.services import FavoriteService
 
 from app.setup.db import db
 

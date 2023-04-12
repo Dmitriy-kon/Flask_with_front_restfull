@@ -5,12 +5,12 @@ from flask_cors import CORS
 
 from app.config import Config
 
-from app.view.genre import genre_ns
-from app.view.director import directors_ns
-from app.view.movie import movies_ns
-from app.view.user import user_ns
-from app.view.auth import auth_ns
-from app.view.favorites import favorite_ns
+from app.view import genre_ns
+from app.view import directors_ns
+from app.view import movies_ns
+from app.view import user_ns
+from app.view import auth_ns
+from app.view import favorite_ns
 
 from app.setup.api import api
 from app.setup.db import db

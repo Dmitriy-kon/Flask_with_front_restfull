@@ -32,7 +32,7 @@ class BaseDAO:
 
         result = self.session.scalars(stmt).all()
 
-        return stmt.all()
+        return result
 
     def create(self, data: dict) -> object:
         """Add item to the database"""

@@ -46,6 +46,8 @@ tokens_model = api.model('Tokens', {
 })
 
 passwords = api.model('Смена пароля', {
-    'old_password': fields.String(example="my_password"),
-    'new_password': fields.String(example='my_new_password')
+    'old_password': fields.String(required=True, example="my_password"),
+    'new_password': fields.String(required=True, example='my_new_password')
 })
+
+movies: fields.List = fields.List(fields.Nested(movie))

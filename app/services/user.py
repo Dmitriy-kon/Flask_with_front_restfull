@@ -3,8 +3,9 @@ import hashlib
 from flask import current_app
 from werkzeug.exceptions import MethodNotAllowed
 
-from app.dao.model.user import User
-from app.dao.user import UserDao
+from app.dao.model import User
+from app.dao import UserDao
+
 from app.exceptions import ItemNotFound, UserAlreadyExist, IncorrectPassword
 from app.tools.security import Security_hash
 

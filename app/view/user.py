@@ -4,9 +4,9 @@ from marshmallow import ValidationError
 from werkzeug.exceptions import MethodNotAllowed
 
 from app.container import user_service, auth_service
-from app.dao.model.user import UserSchema
-from app.exceptions import ItemNotFound, IncorrectPassword
+from app.dao.model import UserSchema
 
+from app.exceptions import ItemNotFound, IncorrectPassword
 from app.setup.api.models import user, passwords
 
 user_ns = Namespace('users')
